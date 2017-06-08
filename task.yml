@@ -12,7 +12,7 @@
      "type": "id"
     },
     {
-     "name": "res_partner_id",
+     "name": "partner_id",
      "label": "Partner ID",
      "allow_null": false,
      "type": "integer",
@@ -22,12 +22,12 @@
    "related": [
     {
      "alias": null,
-     "name": "db-odoo1-lts.res_partner_by_res_partner_id",
+     "name": "db-odoo1-lts.res_partner_by_partner_id",
      "label": "Db-odoo1-lts.res Partner By Res Partner Id",
      "description": null,
      "native": [],
      "type": "belongs_to",
-     "field": "res_partner_id",
+     "field": "partner_id",
      "is_virtual": true,
      "ref_service_id": 8,
      "ref_table": "res_partner",
