@@ -1,0 +1,48 @@
+{
+ "resource": [
+  {
+   "name": "process",
+   "label": "Process",
+   "plural": "Processes",
+   "alias": null,
+   "field": [
+    {
+     "name": "id",
+     "label": "Process ID",
+     "type": "id"
+    },
+    {
+     "name": "res_partner_id",
+     "label": "Partner ID",
+     "allow_null": false,
+     "type": "integer",
+     "required": true
+    }
+   ],
+   "related": [
+    {
+      "alias": null,
+      "name": "db-odoo1-lts.res_partner_by_res_partner_id",
+      "label": "Db-odoo1-lts.res Partner By Res Partner Id",
+      "description": null,
+      "native": [],
+      "type": "belongs_to",
+      "field": "res_partner_id",
+      "is_virtual": true,
+      "ref_service_id": 8,
+      "ref_table": "res_partner",
+      "ref_field": "id",
+      "ref_on_update": null,
+      "ref_on_delete": null,
+      "junction_service_id": null,
+      "junction_table": null,
+      "junction_field": null,
+      "junction_ref_field": null,
+      "always_fetch": false,
+      "flatten": false,
+      "flatten_drop_prefix": false
+    }
+   ]   
+  }
+ ]
+}
