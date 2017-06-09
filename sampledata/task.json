@@ -1,0 +1,15 @@
+{
+ "resource":
+  {
+   "input": "ew0KICJmaWxlcyI6IFsNCiAgew0KICAgImZpbGVfcGF0aCI6ICJpby1saXN0ZS54bHN4IiwNCiAgICJmaWxlX2hhc2giOiAic3NRNUxZaVArc0FKdG9wZ2dIaHkzMFVCcHd6VU81Y3VVNUZLQUltVEwyWT0iDQogIH0NCiBdDQp9",
+   "input_signature": "Base64encodedSignature",
+   "input_signer": "Base64Encodedkey",
+   "output": "BASE64encodedYAML",
+   "output_signature": "Base64encodedSignature",
+   "output_signer": "Base64Encodedkey",
+   "partner_id": 1,
+   "policy_id": "beta01",
+   "process_id": 1,
+   "process_state": "init"
+  }
+}

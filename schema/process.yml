@@ -4,7 +4,6 @@
    "name": "process",
    "label": "Process",
    "plural": "Processes",
-   "alias": null,
    "field": [
     {
      "name": "id",
