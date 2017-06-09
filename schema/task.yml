@@ -8,8 +8,13 @@
    "field": [
     {
      "name": "id",
-     "label": "Process ID",
+     "label": "Task ID",
      "type": "id"
+    },
+    {
+     "name": "process_id",
+     "label": "Process ID",
+     "type": "integer"
     },
     {
      "name": "process_state",

@@ -1,0 +1,32 @@
+{
+ "resource": [
+  {
+   "name": "task",
+   "label": "Task",
+   "plural": "Tasks",
+   "alias": null,
+   "field": [
+    {
+     "name": "id",
+     "label": "File ID",
+     "type": "id"
+    },
+    {
+     "name": "hash",
+     "label": "File hash",
+     "allow_null": false,
+     "length": 43,
+     "type": "string",
+     "required": true
+    },
+    {
+     "name": "input",
+     "label": "Task input",
+     "length": 10000,
+     "type": "string",
+     "required": false
+    }
+   ]   
+  }
+ ]
+}
