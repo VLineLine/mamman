@@ -4,17 +4,22 @@
    "name": "task",
    "label": "Task",
    "plural": "Tasks",
-   "alias": null,
    "field": [
     {
      "name": "id",
      "label": "Task ID",
+     "auto_increment": true,
+     "required": true,
      "type": "id"
     },
     {
      "name": "process_id",
      "label": "Process ID",
-     "type": "integer"
+     "type": "integer",
+     "is_foreign_key": true,
+     "ref_table": "process",
+     "ref_fields": "id",
+     "required": true
     },
     {
      "name": "process_state",

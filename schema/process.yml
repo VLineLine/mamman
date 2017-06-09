@@ -9,6 +9,8 @@
     {
      "name": "id",
      "label": "Process ID",
+     "auto_increment": true,
+     "required": true,
      "type": "id"
     },
     {
