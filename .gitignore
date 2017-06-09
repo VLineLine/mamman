@@ -3,4 +3,4 @@ env/
 build/
 
 # Credentials
-src/conig.json
+#src/conig.json
