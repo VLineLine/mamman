@@ -1,0 +1,6 @@
+# Distribution / packaging
+env/
+build/
+
+# Credentials
+src/conig.json
