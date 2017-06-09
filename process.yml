@@ -1,20 +1,15 @@
 {
  "resource": [
   {
-   "name": "task",
-   "label": "Task",
-   "plural": "Tasks",
+   "name": "process",
+   "label": "Process",
+   "plural": "Processes",
    "alias": null,
    "field": [
     {
      "name": "id",
-     "label": "Task ID",
-     "type": "id"
-    },
-    {
-     "name": "process_id",
      "label": "Process ID",
-     "type": "integer"
+     "type": "id"
     },
     {
      "name": "process_state",
