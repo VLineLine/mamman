@@ -1,13 +1,28 @@
 import pystray
 from PIL import Image
-from time import sleep
 
-tray = pystray.Icon('test name')
+app_info='LTS AS, Mamman 0.1'
+state=False
 
-tray.icon = im = Image.open("logo.ico")
+def on_clicked(icon):
+    global state
+    state = not state
 
-tray.run()
+def on_exit(icon):
+    icon.stop()
 
-sleep(10) # Time in seconds.
 
-#tray.stop() not working
+menu=pystray.Menu(
+    pystray.MenuItem('Checkable', on_clicked, checked=lambda item: state),
+    pystray.MenuItem('Exit', on_exit)
+    )
+
+icon = pystray.Icon(app_info, icon=Image.open("logo_red.ico"), title=app_info, menu=menu)
+
+def setup(icon):
+    icon.visible = True
+
+
+if __name__=="__main__":
+    import pprint
+    icon.run()
