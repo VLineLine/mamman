@@ -2,6 +2,7 @@
 env/
 build/
 workspace/
+src/__pycache__/
 
 # Credentials
 src/config.json
