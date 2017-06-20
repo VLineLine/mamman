@@ -7,6 +7,9 @@ Denne applikasjonen skal i første omgang assistere alle EPLAN-brukere.
 - Kona
 - Dreng
 - Mamma
+- Mamman
+
+sjekke inn, revisjon, gjennomgang
 
 ## Server
 **Tabelloversikt**

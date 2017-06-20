@@ -3,7 +3,7 @@ import json
 import base64
 
 #setting up variables
-with open('config.json') as conf_file:    
+with open('conf\config.json') as conf_file:    
     conf = json.load(conf_file)
     conf_file.close()
 url='https://api.lts.no/api/v2/db/_table/task'
