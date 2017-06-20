@@ -1,6 +1,7 @@
 # Distribution / packaging
 env/
 build/
+workspace/
 
 # Credentials
 src/config.json

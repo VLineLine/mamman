@@ -1,7 +1,7 @@
-from os import getenv, path, mkdir
-import rsa, base64
+from os import getenv, path
+import rsa
 
-class tools(object):
+class tools(object, cryptodir):
     my_key_pub = None
     my_key_priv = None
     
@@ -9,16 +9,9 @@ class tools(object):
         (self.my_key_pub, self.my_key_priv) = self._get_keys()
 
     def _get_keys(self):
-        path_user = getenv('LOCALAPPDATA')
-        path_user = path.join(path_user, 'LTS AS')
 
-        # Demand folder in localappdata
-        if not path.exists(path_user):
-            print('generating path in localappdata')
-            mkdir(path_user)
-
-        path_private_key = path.join(path_user, 'my_private_key.pem')
-        path_public_key = path.join(path_user, 'my_public_key.pem')
+        path_private_key = path.join(userdir.crypto, 'my_private_key.pem')
+        path_public_key = path.join(userdir.crypto, 'my_public_key.pem')
 
         if not path.isfile(path_private_key):
             # Generate, register and save new keypair
