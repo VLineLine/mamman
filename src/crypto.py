@@ -1,17 +1,18 @@
 from os import getenv, path
 import rsa
 
-class tools(object, cryptodir):
+class tools(object):
     my_key_pub = None
     my_key_priv = None
+    dir_crypto = None
     
-    def __init__(self):
+    def __init__(self, cryptodir):
+        self.dir_crypto = cryptodir
         (self.my_key_pub, self.my_key_priv) = self._get_keys()
-
+        
     def _get_keys(self):
-
-        path_private_key = path.join(userdir.crypto, 'my_private_key.pem')
-        path_public_key = path.join(userdir.crypto, 'my_public_key.pem')
+        path_private_key = path.join(self.dir_crypto, 'my_private_key.pem')
+        path_public_key = path.join(self.dir_crypto, 'my_public_key.pem')
 
         if not path.isfile(path_private_key):
             # Generate, register and save new keypair
@@ -58,5 +59,6 @@ class tools(object, cryptodir):
     
       
 if __name__ == '__main__':
-    test = tools()
+    from environment import userdir
+    test = tools(cryptodir=userdir.crypto)
     print(test.get_credentials())

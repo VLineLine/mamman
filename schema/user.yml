@@ -274,6 +274,32 @@
       "db_function": null,
       "is_virtual": false,
       "is_aggregate": false
+    },
+    {
+      "name": "role",
+      "allow_null": false,
+      "auto_increment": false,
+      "db_function": null,
+      "db_type": null,
+      "default": "{}",
+      "fixed_length": false,
+      "is_aggregate": false,
+      "is_foreign_key": false,
+      "is_primary_key": false,
+      "is_unique": false,
+      "is_virtual": false,
+      "label": null,
+      "length": "255",
+      "picklist": null,
+      "precision": null,
+      "ref_field": "",
+      "ref_table": "",
+      "required": false,
+      "scale": 0,
+      "supports_multibyte": false,
+      "type": "string",
+      "validation": null,
+      "value": []
     }
    ]
   }
