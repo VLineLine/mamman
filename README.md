@@ -7,11 +7,7 @@ Denne applikasjonen skal i første omgang assistere alle EPLAN-brukere.
 - Kona
 - Dreng
 - Mamma
-<<<<<<< HEAD
 - Mamman
-
-sjekke inn, revisjon, gjennomgang
-=======
 - L Doc
 - Document Reviewer
 - Håvards knot og surr
@@ -19,7 +15,9 @@ sjekke inn, revisjon, gjennomgang
 - Drawing helper
 - Drawing reviewer
 - LTS rev
->>>>>>> origin/dev
+
+
+sjekke inn, revisjon, gjennomgang
 
 ## Server
 **Tabelloversikt**
