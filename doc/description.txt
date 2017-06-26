@@ -1,5 +1,5 @@
 LTS AS hjelper kunder ved konstruksjon av elektro- og automasjonsanlegg. Vi har erfart at det er en utfordring å holde styr på dataflyt og komunikkasjon mellom bedrifter i et prosjekt. Våre kunder gir oss som regel tilgang via VPN og alt for mye data når vi engasjeres for å bidra i prosjekter. LTS AS har utviklet programmvaren "Mamman" for å oppnå bedre informasjonsflyt og mindre angrepsflate fra interesenter i slike prosjekter.
 
-Mamman er en klient som kjører på PCen til brukere i et prosjekt. Mamman henter inn data som brukere trenger for å gjøre jobben sin. Mamman sjekker også inn data når brukere melder at de er ferdig med en oppgave. Det enkle verktøyet fjerner behovet for leting i mappestrukturer under prosjektets gang.
+Mamman er en klient som kjører på PCen til brukere i et prosjekt. Mamman henter inn data som brukere trenger for å gjøre jobben sin. Når en bruker er ferdig med en oppgave, sjekkes dataene inn og tilgjengeliggjøres for neste bruker(e) i prosessen. Det enkle verktøyet fjerner behovet for leting i mappestrukturer under prosjektets gang.
 
 Data senders og mottas via et API til en server i  LTS AS sine lokaler. Dette skjer over en sikker linje (TLS tilkobling). Vi er åpne for å gi kunder muligheten til å kjøre egen server, men dette behovet har ikke meldt seg enda.
