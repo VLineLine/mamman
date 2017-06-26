@@ -1,0 +1,5 @@
+LTS AS har utviklet programmvaren "Mamman" for å sikre kvalitet, sporbarhet og effektivitet i prosjekter.
+
+Mamman er en dropbox-aktig klient som sender og mottar data som brukere trenger for å gjøre jobben sin. Det enkle verktøyet fjerner behovet for leting i mappestrukturer under prosjektets gang.
+
+Det som blir produsert blir sendt via et API til en server i  LTS AS sine lokaler. Mamman signerer data automatisk og sender det til serveren ved hjelp av en TLS tikobling. Vi er åpne for å gi kunder muligheten til å kjøre egen server, men dette behovet har ikke meldt seg enda.
