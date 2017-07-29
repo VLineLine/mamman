@@ -21,21 +21,19 @@ from src.environment import userdir
 from pystray import Icon, Menu, MenuItem
 from PIL import Image
 from automat import MethodicalMachine
+from yapsy.PluginManager import PluginManager
+from os import getcwd, path
 
 user_key = None
 state = False
 client_machine = None
 
-traces = []
-
 def tracer(old_state, input, new_state):
     "Tracer function for debugging"
-    traces.append((old_state, input, new_state))
-    print("input:", input, "new state:", new_state)
-    return None # "I only care about inputs, not outputs"
+    print("old_state:", old_state, "input:", input, "new state:", new_state)
 
 
-def on_click_available(icon):
+def on_click_available():
     "UI event: User is enabeling the available flag"
     print('UI event: click')
     global state
@@ -46,6 +44,10 @@ def on_click_available(icon):
 def on_default():
     "UI event: Single click event. Not used yet."
     print('UI event: Default')
+
+def on_ready():
+    "Event: Mamman is ready for use"
+    client_machine.reading_finished()
 
 def on_new_process(icon, item):
     "UI event: Establish new process"
@@ -66,20 +68,6 @@ def on_click_open_dir(icon, tasting):
     print('UI event: Open working directory')
     subprocess.Popen('explorer "' + userdir.workspace + '"')
 
-menu_1 = Menu(
-    MenuItem('Åpne arbeidsmappe', on_click_open_dir),
-    MenuItem('Hent oppgave', Menu(
-        MenuItem('2t, gjennomgang av revisjon', on_open_task),
-        MenuItem('1t, gjennomgang av revisjon', on_open_task)
-    )),
-    MenuItem('Ny prosess', Menu(
-        MenuItem('Gjennomgang', on_new_process),
-        MenuItem('EPLAN prosjekt', on_new_process)
-    )),
-    MenuItem('Jeg er tilgjengelig', on_click_available, checked=lambda item: state),
-    MenuItem('Avslutt Mamman', on_exit),
-    MenuItem('Default click', on_default, default=True, visible=False))
-
 #============================ state machine start
 class clientMachine(object):
     "Finite state-machine for the Mamman client"
@@ -89,6 +77,7 @@ class clientMachine(object):
     _machine = MethodicalMachine()
     _connection = None
     _icon = None
+    _plugin_manager = PluginManager()
 
     setTrace = _machine._setTrace # making trace-function available. Usefull debugging feature
 
@@ -117,10 +106,18 @@ class clientMachine(object):
                           icon=Image.open("res\logo_yellow.png"),
                           title='LTS AS, Mamman 0.1')
         self._icon.visible = True
-        #self._icon.icon = Image.open("res\logo_blue.png")
         self._icon.menu = Menu(MenuItem('Avslutt Mamman', on_exit))
-        self._icon.run()
+
+        # Find plugins
+        self._plugin_manager.setPluginPlaces([path.join(getcwd(), "src", "plugins")])
+        # Load plugins
+        self._plugin_manager.collectPlugins()
+        # Activate plugins
+        for _pluginInfo in self._plugin_manager.getAllPlugins():
+            self._plugin_manager.activatePluginByName(_pluginInfo.name)
         ##TODO: flag finished
+        on_ready()
+        self._icon.run() #_icon.run is last because it is not ending before _icon.stop
 
     @_machine.output()
     def _verify_user(self):
@@ -134,7 +131,20 @@ class clientMachine(object):
     @_machine.output()
     def _list_tasks(self):
         "Populate tasks in the the icon menu"
-        print("_list_tasks is running")
+        self._icon.icon = Image.open("res\logo_blue.png")
+        self._icon.menu = Menu(
+            MenuItem('Åpne arbeidsmappe', on_click_open_dir),
+            MenuItem('Hent oppgave', Menu(
+                MenuItem('2t, gjennomgang av revisjon', on_open_task),
+                MenuItem('1t, gjennomgang av revisjon', on_open_task)
+            )),
+            MenuItem('Ny prosess', Menu(
+                MenuItem('Gjennomgang', on_new_process),
+                MenuItem('EPLAN prosjekt', on_new_process)
+            )),
+            MenuItem('Jeg er tilgjengelig', on_click_available, checked=lambda item: state),
+            MenuItem('Avslutt Mamman', on_exit),
+            MenuItem('Default click', on_default, default=True, visible=False))
 
     @_machine.output()
     def _close_application(self):
