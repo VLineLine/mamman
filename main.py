@@ -98,6 +98,10 @@ class clientMachine(object):
         "Initiate connection to server"
 
     @_machine.input()
+    def reading_finished(self):
+        "Add tasks to menu"
+
+    @_machine.input()
     def toggle_available(self):
         "Toggle availability flag"
 
@@ -127,9 +131,14 @@ class clientMachine(object):
         if user_key != None:
             print("ATOMATIC event: User login OK\n", user_key)
 
+    @_machine.output()
+    def _list_tasks(self):
+        "Populate tasks in the the icon menu"
+        print("_list_tasks is running")
 
     @_machine.output()
     def _close_application(self):
+        "Close the application"
         self._icon.menu = None
         #self._icon.visible = False
         self._icon.stop()
@@ -147,11 +156,15 @@ class clientMachine(object):
 
     @_machine.state()
     def reading(self):
-        "In this state, you are connected and you read content from the server."
+        "In this state, you are loading tasks"
 
     @_machine.state()
-    def idle(self):
-        "In this state, you are connected and you wait for tasks."
+    def listing(self):
+        "In this state, the UI lists available tasks"
+
+    @_machine.state()
+    def working(self):
+        "In this state, you are working on a task"
 
     @_machine.state()
     def ending(self):
@@ -182,7 +195,15 @@ class clientMachine(object):
             ]
         )
 
-    idle.upon(
+    reading.upon(
+        reading_finished,
+        enter=listing,
+        outputs=[
+            _list_tasks
+            ]
+        )
+
+    listing.upon(
         close_application,
         enter=ending,
         outputs=[
