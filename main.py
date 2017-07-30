@@ -33,37 +33,35 @@ def tracer(old_state, input, new_state):
     print("old_state:", old_state, "input:", input, "new state:", new_state)
 
 
-def on_click_available():
+def event_click_available():
     "UI event: User is enabeling the available flag"
     print('UI event: click')
     global state
     state = not state
-    if state:
-        icon.title = 'Mamman henter oppgave\r\nen linje til'
 
-def on_default():
+def event_default():
     "UI event: Single click event. Not used yet."
     print('UI event: Default')
 
-def on_ready():
+def event_ready():
     "Event: Mamman is ready for use"
     client_machine.reading_finished()
 
-def on_new_process(icon, item):
+def event_new_process(icon, item):
     "UI event: Establish new process"
     print(icon)
     print(item)
 
-def on_open_task(icon, item):
+def event_open_task(icon, item):
     "UI event: Open task folder"
     print(icon)
     print(item)
 
-def on_exit():
+def event_exit():
     "UI event: Exit"
     client_machine.close_application()
 
-def on_click_open_dir(icon, tasting):
+def event_click_open_dir(icon, tasting):
     "UI event: Open working directory"
     print('UI event: Open working directory')
     subprocess.Popen('explorer "' + userdir.workspace + '"')
@@ -101,12 +99,12 @@ class clientMachine(object):
 #============================ outputs
     @_machine.output()
     def _initiate_application(self):
-        "Establish the icon"
+        "Establish all parts of the application"
         self._icon = Icon(name='Mamman',
                           icon=Image.open("res\logo_yellow.png"),
                           title='LTS AS, Mamman 0.1')
         self._icon.visible = True
-        self._icon.menu = Menu(MenuItem('Avslutt Mamman', on_exit))
+        self._icon.menu = Menu(MenuItem('Avslutt Mamman', event_exit))
 
         # Find plugins
         self._plugin_manager.setPluginPlaces([path.join(getcwd(), "src", "plugins")])
@@ -116,7 +114,7 @@ class clientMachine(object):
         for _pluginInfo in self._plugin_manager.getAllPlugins():
             self._plugin_manager.activatePluginByName(_pluginInfo.name)
         ##TODO: flag finished
-        on_ready()
+        event_ready()
         self._icon.run() #_icon.run is last because it is not ending before _icon.stop
 
     @_machine.output()
@@ -133,18 +131,18 @@ class clientMachine(object):
         "Populate tasks in the the icon menu"
         self._icon.icon = Image.open("res\logo_blue.png")
         self._icon.menu = Menu(
-            MenuItem('Åpne arbeidsmappe', on_click_open_dir),
             MenuItem('Hent oppgave', Menu(
-                MenuItem('2t, gjennomgang av revisjon', on_open_task),
-                MenuItem('1t, gjennomgang av revisjon', on_open_task)
+                MenuItem('2t, gjennomgang av revisjon', event_open_task),
+                MenuItem('1t, gjennomgang av revisjon', event_open_task)
             )),
             MenuItem('Ny prosess', Menu(
-                MenuItem('Gjennomgang', on_new_process),
-                MenuItem('EPLAN prosjekt', on_new_process)
+                MenuItem('Gjennomgang', event_new_process),
+                MenuItem('EPLAN prosjekt', event_new_process)
             )),
-            MenuItem('Jeg er tilgjengelig', on_click_available, checked=lambda item: state),
-            MenuItem('Avslutt Mamman', on_exit),
-            MenuItem('Default click', on_default, default=True, visible=False))
+            MenuItem('Jeg er tilgjengelig', event_click_available, checked=lambda self: state, enabled=lambda self: state),
+            MenuItem('Jeg er tilgjengelig', event_click_available, checked=lambda item: state),
+            MenuItem('Avslutt Mamman', event_exit),
+            MenuItem('Default click', event_default, default=True, visible=False))
 
     @_machine.output()
     def _close_application(self):
