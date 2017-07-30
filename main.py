@@ -28,11 +28,12 @@ user_key = None
 state = False
 client_machine = None
 
+#============================ tools start
 def tracer(old_state, input, new_state):
     "Tracer function for debugging"
     print("old_state:", old_state, "input:", input, "new state:", new_state)
-
-
+#============================ tools end
+#============================ event handelers start
 def event_click_available():
     "UI event: User is enabeling the available flag"
     print('UI event: click')
@@ -65,7 +66,7 @@ def event_click_open_dir(icon, tasting):
     "UI event: Open working directory"
     print('UI event: Open working directory')
     subprocess.Popen('explorer "' + userdir.workspace + '"')
-
+#============================ event handelers end
 #============================ state machine start
 class clientMachine(object):
     "Finite state-machine for the Mamman client"
@@ -106,15 +107,11 @@ class clientMachine(object):
         self._icon.visible = True
         self._icon.menu = Menu(MenuItem('Avslutt Mamman', event_exit))
 
-        # Find plugins
-        self._plugin_manager.setPluginPlaces([path.join(getcwd(), "src", "plugins")])
-        # Load plugins
-        self._plugin_manager.collectPlugins()
-        # Activate plugins
-        for _pluginInfo in self._plugin_manager.getAllPlugins():
+        self._plugin_manager.setPluginPlaces([path.join(getcwd(), "src", "plugins")]) # Find plugins
+        self._plugin_manager.collectPlugins() # Load plugins
+        for _pluginInfo in self._plugin_manager.getAllPlugins(): # Activate plugins
             self._plugin_manager.activatePluginByName(_pluginInfo.name)
-        ##TODO: flag finished
-        event_ready()
+        event_ready() # Mark that the process is finished by trigging an event
         self._icon.run() #_icon.run is last because it is not ending before _icon.stop
 
     @_machine.output()
