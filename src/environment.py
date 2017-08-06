@@ -1,8 +1,16 @@
-from os import getenv, path, mkdir
+from os import getenv, path, mkdir, sys
 
 class userdir(object):
-    _init_path = getenv('LOCALAPPDATA')
+    #Find os
+    _os=sys.platform.upper()
     
+    #For windows
+    if "WIN" in _os:
+      _init_path = getenv('LOCALAPPDATA')
+      
+    else:	#Linux or mac
+      _init_path = path.expanduser('~')
+      
     _company_path = path.join(_init_path, 'LTS AS')
     if not path.exists(_company_path):
         print('generating path '+ _company_path)
