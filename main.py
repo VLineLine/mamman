@@ -22,7 +22,8 @@ from pystray import Icon, Menu, MenuItem
 from PIL import Image
 from automat import MethodicalMachine
 from yapsy.PluginManager import PluginManager
-from os import getcwd, path #,startfile
+from os import getcwd, path, sys
+
 
 user_key = None
 state = False
@@ -42,7 +43,13 @@ def event_click_available():
 
 def event_default():
     "UI event: Single click on icon"
-    #startfile('https://lts.no/produkter/mamman')
+    
+    #For windows
+    if "WIN" in sys.platform.upper():
+      os.startfile('https://lts.no/produkter/mamman')
+    else:	#Linux or mac
+      subprocess.call(['xdg-open','https://lts.no/produkter/mamman'])
+    
 
 def event_ready():
     "Event: Mamman is ready for use"
