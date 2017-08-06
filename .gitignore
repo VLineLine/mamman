@@ -6,3 +6,18 @@ src/__pycache__/
 
 # Credentials
 src/config.json
+
+# Kdev
+apidocs
+.kdev4
+build
+*~
+*.orig
+*.rej
+doxygen.log
+Doxyfile
+*.kdevelop
+*.kdevelop.filelist
+*.kdevelop.pcs
+*.kdevses
+.*kate-swp
