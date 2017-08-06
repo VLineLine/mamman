@@ -22,7 +22,7 @@ from pystray import Icon, Menu, MenuItem
 from PIL import Image
 from automat import MethodicalMachine
 from yapsy.PluginManager import PluginManager
-from os import getcwd, path, startfile
+from os import getcwd, path #,startfile
 
 user_key = None
 state = False
@@ -42,7 +42,7 @@ def event_click_available():
 
 def event_default():
     "UI event: Single click on icon"
-    startfile('https://lts.no/produkter/mamman')
+    #startfile('https://lts.no/produkter/mamman')
 
 def event_ready():
     "Event: Mamman is ready for use"
@@ -102,7 +102,7 @@ class clientMachine(object):
     def _initiate_application(self):
         "Establish all parts of the application"
         self._icon = Icon(name='Mamman',
-                          icon=Image.open("res\logo_yellow.png"),
+                          icon=Image.open(path.join('res','logo_yellow.png')),
                           title='LTS AS, Mamman 0.1')
         self._icon.visible = True
         self._icon.menu = Menu(MenuItem('Avslutt Mamman', event_exit))
@@ -126,7 +126,7 @@ class clientMachine(object):
     @_machine.output()
     def _list_tasks(self):
         "Populate tasks in the the icon menu"
-        self._icon.icon = Image.open("res\logo_blue.png")
+        self._icon.icon = Image.open(path.join('res','logo_blue.png'))
         self._icon.menu = Menu(
             MenuItem('Hent oppgave', Menu(
                 MenuItem('2t, gjennomgang av revisjon', event_open_task),
